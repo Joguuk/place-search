@@ -24,6 +24,12 @@ public class KeywordPersistenceAdaptor implements LoadKeywordPort, UpdateKeyword
     private final KeywordRepository keywordRepository;
     private final KeywordMapper keywordMapper;
 
+    /**
+     * 가장 많이 검색된 10개 키워드를 조회하여 반환한다.
+     *
+     * @author joguk
+     * @date 2022/07/26 11:09 오후
+     */
     @Override
     public List<Keyword> loadPopularTenKeyword() {
         List<KeywordJpaEntity> keywordJpaEntities = keywordRepository.selectPopularTenKeyword();
@@ -32,17 +38,32 @@ public class KeywordPersistenceAdaptor implements LoadKeywordPort, UpdateKeyword
                 .collect(Collectors.toList());
     }
 
+    /**
+     * 키워드가 있는 경우 검색 횟수를 1 증가시키고, 없는 경우 새롭게 저장한다.
+     *
+     * @author joguk
+     * @date 2022/07/26 11:09 오후
+     */
     @Override
     public void saveKeyword(String searchWord) {
         Optional<KeywordJpaEntity> optionalKeyword = keywordRepository.findByKeyword(searchWord);
 
         if (optionalKeyword.isPresent()) {
             KeywordJpaEntity keywordJpaEntity = optionalKeyword.get();
-            keywordJpaEntity.increaseSearchCount();
-            keywordRepository.save(keywordJpaEntity);
+            keywordRepository.increaseSearchCount(keywordJpaEntity);
             return;
         }
 
+        createKeyword(searchWord);
+    }
+
+    /**
+     * 키워드를 생성한다.
+     *
+     * @author joguk
+     * @date 2022/07/26 11:10 오후
+     */
+    private void createKeyword(String searchWord) {
         KeywordJpaEntity keywordJpaEntity = KeywordJpaEntity.builder()
                 .keyword(searchWord)
                 .keywordSearchCount(1L)
