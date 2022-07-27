@@ -1,0 +1,5 @@
+### 장소 검색
+GET http://localhost:8080/search/places/v1?searchWord=bank
+
+### 인기 검색어 조회
+GET http://localhost:8080/search/keywords/v1/popular-ten

@@ -1,5 +1,9 @@
 # place-search
 
+### Http Request
+- api-guide.http
+
+### 요구사항
 1. 동시성 이슈가 발생할 수 있는 부분을 염두에 둔 설계 및 구현
    - 키워드 별로 검색된 횟수를 TB_KEYWORD 테이블에 저장하며 단일연산을 수행하는 update 쿼리로 count+1을 하기에 동시성 이슈 발생 가능성 제거했습니다.  
      Repeatable Read를 기본 Transaction Isolation Level로 사용하는 Mysql 같은 경우, MVCC(Multi Version Concurrecy Controll)을 통해 동시 접근을 허용하여 트랙잭션 간의 원자성을 보장합니다.
