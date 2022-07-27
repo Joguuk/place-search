@@ -1,10 +1,12 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/search-place
+    url: jdbc:h2:mem:search-place
     username: sa
     password:
     driver-class-name: org.h2.Driver
-
+  h2:
+    console:
+      enabled: true
   jpa:
     hibernate:
       ddl-auto: create
