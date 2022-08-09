@@ -21,7 +21,7 @@ class PlaceTest {
     public void When_Place_Plane_Name_And_Address_Equals_Then_True() {
         //given
         Place sut = new Place("GS편의점","00", new Address("서울시 강남구","서울시 강남구"), new Location("1","2"), SearchConstants.Providers.Kakao);
-        Place stub = new Place("GS편의점","00", new Address("서울시 강남구","서울시 강남구"), new Location("1","2"), SearchConstants.Providers.Kakao);
+        Place stub = new Place("GS편의점","00", new Address("서울시 강남구","서울시 강남구"), new Location("1","2"), SearchConstants.Providers.Naver);
 
         //when
         boolean duplicate = sut.isDuplicate(Collections.singletonList(stub));
@@ -35,7 +35,7 @@ class PlaceTest {
     public void When_Place_Tag_White_Space_Name_And_Address_Equals_Then_True() {
         //given
         Place sut = new Place("GS편의점","00", new Address("서울시 강남구","서울시 강남구"), new Location("1","2"), SearchConstants.Providers.Kakao);
-        Place stub = new Place("<html> GS편의점</html>","00", new Address("서울시 강남구","서울시 강남구"), new Location("1","2"), SearchConstants.Providers.Kakao);
+        Place stub = new Place("<html> GS편의점</html>","00", new Address("서울시 강남구","서울시 강남구"), new Location("1","2"), SearchConstants.Providers.Naver);
 
         //when
         boolean duplicate = sut.isDuplicate(Collections.singletonList(stub));
@@ -49,7 +49,7 @@ class PlaceTest {
     public void When_Place_Name_Equal_But_Address_Diff_Then_False() {
         //given
         Place sut = new Place("GS편의점","00", new Address("서울시 강남구1","서울시 강남구"), new Location("1","2"), SearchConstants.Providers.Kakao);
-        Place stub = new Place("GS편의점","00", new Address("서울시 강남구","서울시 강남구"), new Location("1","2"), SearchConstants.Providers.Kakao);
+        Place stub = new Place("GS편의점","00", new Address("서울시 강남구","서울시 강남구"), new Location("1","2"), SearchConstants.Providers.Naver);
 
         //when
         boolean duplicate = sut.isDuplicate(Collections.singletonList(stub));
