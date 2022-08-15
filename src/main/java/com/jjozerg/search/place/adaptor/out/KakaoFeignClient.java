@@ -4,6 +4,7 @@ import com.jjozerg.search.common.config.FeignConfig;
 import com.jjozerg.search.place.adaptor.out.dto.KakaoPlaceResDto;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -29,6 +30,7 @@ public interface KakaoFeignClient {
             @RequestParam(name = "size") int size);
 }
 
+@Component
 class KakaoFeignClientFallbackFactory implements FallbackFactory<KakaoFeignClient> {
     @Override
     public KakaoFeignClient create(Throwable cause) {
