@@ -48,13 +48,7 @@ public class KeywordPersistenceAdaptor implements LoadKeywordPort, UpdateKeyword
     public void saveKeyword(String searchWord) {
         Optional<KeywordJpaEntity> optionalKeyword = keywordRepository.findByKeyword(searchWord);
 
-        if (optionalKeyword.isPresent()) {
-            KeywordJpaEntity keywordJpaEntity = optionalKeyword.get();
-            keywordRepository.increaseSearchCount(keywordJpaEntity);
-            return;
-        }
-
-        createKeyword(searchWord);
+        optionalKeyword.ifPresentOrElse(keywordRepository::increaseSearchCount, () -> createKeyword(searchWord));
     }
 
     /**
