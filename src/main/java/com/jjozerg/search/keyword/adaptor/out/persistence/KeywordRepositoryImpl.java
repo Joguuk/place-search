@@ -22,6 +22,7 @@ public class KeywordRepositoryImpl implements KeywordRepositoryCustom {
         this.queryFactory = new JPAQueryFactory(em);
     }
 
+    @Override
     public List<KeywordJpaEntity> selectPopularTenKeyword() {
         return queryFactory
                 .selectFrom(keywordJpaEntity)
@@ -34,7 +35,7 @@ public class KeywordRepositoryImpl implements KeywordRepositoryCustom {
     public void increaseSearchCount(KeywordJpaEntity keyword) {
         queryFactory.update(keywordJpaEntity)
                 .set(keywordJpaEntity.keywordSearchCount, keywordJpaEntity.keywordSearchCount.add(1))
-                .where(keywordJpaEntity.id.eq(keyword.getId()))
+                .where(keywordJpaEntity.keyword.eq(keyword.getKeyword()))
                 .execute();
     }
 
