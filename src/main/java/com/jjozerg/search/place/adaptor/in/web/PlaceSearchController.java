@@ -30,9 +30,9 @@ public class PlaceSearchController {
     private final PlaceMapper placeMapper;
 
     @GetMapping
-    public List<PlaceSearchResDto> retrievePlaceList(
+    public List<PlaceSearchResDto> searchPlaceList(
             @Parameter(description = "검색어")     @RequestParam String searchWord) {
-        Places places = placeSearchUseCase.retrievePlaceList(searchWord);
+        Places places = placeSearchUseCase.searchPlaceList(searchWord);
         return placeMapper.mapToResponseDto(places);
     }
 }

@@ -23,13 +23,13 @@ public class PlaceSearchService implements PlaceSearchUseCase {
     private final KeywordService keywordService;
 
     /**
-     * 검색어에 해당하는 장소 목록을 조회한다.
+     * 검색어에 해당하는 장소 목록을 조회한 후 검색 키워드를 저장한다.
      *
      * @author joguk
      * @date 2022/07/26 8:17 오후
      */
     @Override
-    public Places retrievePlaceList(String searchWord) {
+    public Places searchPlaceList(String searchWord) {
         Places places = placeSearchPort.retrievePlaces(searchWord);
         keywordService.saveKeyword(searchWord);
 

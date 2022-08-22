@@ -10,5 +10,5 @@ import com.jjozerg.search.domain.Places;
  */
 
 public interface PlaceSearchUseCase {
-    Places retrievePlaceList(String searchWord);
+    Places searchPlaceList(String searchWord);
 }
