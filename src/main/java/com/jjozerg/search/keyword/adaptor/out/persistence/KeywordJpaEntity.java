@@ -22,10 +22,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Table(name = "TB_KEYWORD")
 public class KeywordJpaEntity extends BaseEntity{
-    @Id @GeneratedValue
-    @Column(name = "keyword_id")
-    private Long id;
-
+    @Id
     @Column(name = "keyword")
     private String keyword;
 

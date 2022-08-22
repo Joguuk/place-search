@@ -6,7 +6,11 @@ import com.jjozerg.search.keyword.application.port.out.LoadKeywordPort;
 import com.jjozerg.search.keyword.application.port.out.UpdateKeywordPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -45,6 +49,10 @@ public class KeywordPersistenceAdaptor implements LoadKeywordPort, UpdateKeyword
      * @date 2022/07/26 11:09 오후
      */
     @Override
+    @Retryable(value = SQLException.class,
+            maxAttempts = 3,
+            backoff = @Backoff(delay = 100))
+    @Transactional
     public void saveKeyword(String searchWord) {
         Optional<KeywordJpaEntity> optionalKeyword = keywordRepository.findByKeyword(searchWord);
 

@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 public class KeywordMapper {
     public Keyword mapToDomainEntity(KeywordJpaEntity keywordJpaEntity) {
         return Keyword.builder()
-                .id(keywordJpaEntity.getId())
                 .keyword(keywordJpaEntity.getKeyword())
                 .keywordSearchCount(keywordJpaEntity.getKeywordSearchCount())
                 .build();
